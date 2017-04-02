@@ -12,5 +12,6 @@ CREATE TABLE `data_per_second` (
   `min_value` double NOT NULL DEFAULT '0',
   `sum` double NOT NULL DEFAULT '0',
   `time_in_seconds` bigint(20) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `UK_8268baoviuklln59fvh87yrxa` (`time_in_seconds`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;

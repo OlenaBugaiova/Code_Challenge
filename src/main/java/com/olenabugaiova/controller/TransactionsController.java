@@ -29,9 +29,7 @@ public class TransactionsController {
     @RequestMapping(path = "/transactions", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> handleTransaction(@RequestBody Transaction transaction) {
 
-        transactionService.insertTransaction(transaction);
-        boolean result = secondDataService.updateSecondData(transaction);
-
+        boolean result = transactionService.insertTransaction(transaction);
         if(result) {
             return ResponseEntity.status(HttpStatus.CREATED).body(null);
         } else {

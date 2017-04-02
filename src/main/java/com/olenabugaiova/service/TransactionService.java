@@ -1,10 +1,14 @@
 package com.olenabugaiova.service;
 
+import com.olenabugaiova.repository.SecondRepository;
 import com.olenabugaiova.repository.TransactionRepository;
 import com.olenabugaiova.entity.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.SQLException;
 import java.util.Calendar;
 
 /**
@@ -16,8 +20,14 @@ public class TransactionService {
     @Autowired
     private TransactionRepository transactionRepository;
 
+    @Autowired
+    private SecondRepository secondRepository;
+
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = SQLException.class)
     public boolean insertTransaction(Transaction transaction) {
+        long transactionTimeInSeconds = transaction.getTimestamp()/ SecondDataService.MILLISECONDS_IN_SECOND;
         boolean result = transactionRepository.insertTransaction(transaction);
+        result = result && secondRepository.updateSecondData(transaction.getAmount() ,transactionTimeInSeconds);
         return result;
     }
 

@@ -21,12 +21,6 @@ public class SecondDataService {
     @Autowired
     private SecondRepository secondRepository;
 
-    public boolean updateSecondData(Transaction transaction) {
-        long timeInSeconds = transaction.getTimestamp()/MILLISECONDS_IN_SECOND;
-        boolean result = secondRepository.updateSecondData(transaction.getAmount() ,timeInSeconds);
-        return result;
-    }
-
     public List<Second> getDataForLastPeriod() {
         Calendar calendar = Calendar.getInstance();
         long startIntervalTime = calendar.getTimeInMillis()/MILLISECONDS_IN_SECOND - TIME_INTERVAL_FOR_STATISTICS;

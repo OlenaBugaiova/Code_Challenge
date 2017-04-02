@@ -17,7 +17,7 @@ public class Second {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="time_in_seconds", nullable = false)
+    @Column(name="time_in_seconds", nullable = false, unique=true)
     private long timeInSeconds;
 
     @Column(name="sum", nullable = false, columnDefinition = "double default 0.0")
